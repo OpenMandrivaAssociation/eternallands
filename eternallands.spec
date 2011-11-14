@@ -40,6 +40,7 @@ of several character races but all are equal.
 %patch2 -p1 -b .verbose
 
 %build
+sed -i s,-march=i686,,g make.conf
 %make -f Makefile.linux
 
 %install
