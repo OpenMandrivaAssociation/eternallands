@@ -9,6 +9,8 @@ URL:		http://www.eternal-lands.com
 # http://ppa.launchpad.net/pjbroad/ppa/ubuntu/pool/main/e/
 Source0:	%{name}-%{version}.tar.gz
 Patch0:		eternallands-1.9.2-wrapper.patch
+Patch1:		eternallands-1.9.2-linking.patch
+Patch2:		eternallands-1.9.2-verbose.patch
 BuildRequires:	cal3d-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	libxml2-devel
@@ -34,6 +36,8 @@ of several character races but all are equal.
 %prep
 %setup -q
 %patch0 -p1 -b .wrapper
+%patch1 -p1 -b .linking
+%patch2 -p1 -b .verbose
 
 %build
 %make -f Makefile.linux
