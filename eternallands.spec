@@ -19,6 +19,7 @@ BuildRequires:	png-devel
 BuildRequires:	SDL-devel
 BuildRequires:	SDL_image-devel
 BuildRequires:	SDL_net-devel
+BuildRequires:	libx11-devel
 BuildRequires:	zlib-devel
 Requires:	zenity
 Requires:	%{name}-data = %{version}
