@@ -1,0 +1,12 @@
+diff -urN eternallands-1.9.2/Makefile.linux eternallands-1.9.2-patched/Makefile.linux
+--- eternallands-1.9.2/Makefile.linux	2011-06-16 09:03:18.000000000 +1100
++++ eternallands-1.9.2-patched/Makefile.linux	2011-11-14 20:57:27.684342218 +1100
+@@ -11,7 +11,7 @@
+ 
+ PNG_SCREENSHOT_LIBS = -lpng
+ LDFLAGS=$(shell sdl-config --libs) $(shell xml2-config --libs) -lSDL_net -lSDL_image -lopenal $(XDIR) -lGL -lGLU -lcal3d -lm $(EXTRA_LIBS) -lz -lpng -lvorbis -lvorbisfile \
+-	$(foreach FEATURE, $(FEATURES), $($(FEATURE)_LIBS))
++	$(foreach FEATURE, $(FEATURES), $($(FEATURE)_LIBS)) -lX11 -lstdc++
+ _LDFLAGS=$(XDIR) -lGL -lpthread -lstdc++
+ 
+ # This works on Ubuntu 8.04 (LTS) at least

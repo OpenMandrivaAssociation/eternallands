@@ -1,0 +1,49 @@
+diff -urN eternallands-1.9.2/Makefile.linux eternallands-1.9.2-patched2/Makefile.linux
+--- eternallands-1.9.2/Makefile.linux	2011-06-16 09:03:18.000000000 +1100
++++ eternallands-1.9.2-patched2/Makefile.linux	2011-11-14 21:03:33.847331923 +1100
+@@ -106,7 +106,7 @@
+ # the compile targets
+ $(EXE): $(OBJS)
+ 	@echo "  LINK $(EXE)"
+-	@$(LINK) $(CFLAGS) -o $(EXE) $(OBJS) $(LDFLAGS)
++	$(LINK) $(CFLAGS) -o $(EXE) $(OBJS) $(LDFLAGS)
+ 
+ #recompile on Makefile or conf change
+ #.depend $(OBJS): Makefile.linux make.conf
+@@ -115,23 +115,23 @@
+ 
+ $(COBJS): %.o: %.c Makefile.linux make.conf
+ 	@echo "  CC   $@"
+-	@if $(CC) $(CFLAGS) -MT '$@' -MD -MP -MF '.deps/$@.pp' -c $< -o $@; then \
++	if $(CC) $(CFLAGS) -MT '$@' -MD -MP -MF '.deps/$@.pp' -c $< -o $@; then \
+ 		mv ".deps/$@.pp" ".deps/$@.P"; \
+ 	else rm -f ".deps/$@.pp"; exit 1; \
+ 	fi
+ 
+ $(CXXOBJS): %.o: %.cpp Makefile.linux make.conf
+ 	@echo "  CXX  $@"
+-	@if $(CXX) $(CXXFLAGS) -MT '$@' -MD -MP -MF '.deps/$@.pp' -c $< -o $@; then \
++	if $(CXX) $(CXXFLAGS) -MT '$@' -MD -MP -MF '.deps/$@.pp' -c $< -o $@; then \
+ 		mv ".deps/$@.pp" ".deps/$@.P"; \
+ 	else rm -f ".deps/$@.pp"; exit 1; \
+ 	fi
+ 
+ release:
+-	@$(MAKE) -f Makefile.linux 'CFLAGS=$(_CFLAGS)' 'CXXFLAGS=$(_CXXFLAGS)'
++	$(MAKE) -f Makefile.linux 'CFLAGS=$(_CFLAGS)' 'CXXFLAGS=$(_CXXFLAGS)'
+ 
+ static:
+-	@$(MAKE) -f Makefile.linux 'CFLAGS=$(_CFLAGS)' 'CXXFLAGS=$(_CXXFLAGS)' 'LDFLAGS=$(_LDFLAGS)' 'OBJS=$(OBJS) $(STATICLIBS)'
++	$(MAKE) -f Makefile.linux 'CFLAGS=$(_CFLAGS)' 'CXXFLAGS=$(_CXXFLAGS)' 'LDFLAGS=$(_LDFLAGS)' 'OBJS=$(OBJS) $(STATICLIBS)'
+ 
+ clean:
+ 	rm -f $(OBJS) $(EXE) 
+@@ -144,7 +144,7 @@
+ 	$(CXX) $(CXXFLAGS) -MM $(patsubst %.o, %.cpp, $(CXXOBJS)) >>.depend
+ 
+ make.conf: make.defaults
+-	@if (test -f $@ -a '$(UPDATE_CONF)' != 'yes'); \
++	if (test -f $@ -a '$(UPDATE_CONF)' != 'yes'); \
+ 	then \
+ 		echo '**'; \
+ 		echo '* WARNING: $< is newer than $@!'; \

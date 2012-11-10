@@ -1,0 +1,55 @@
+diff -urN eternallands-1.9.2/pkgfiles/eternallands eternallands-1.9.2-patched/pkgfiles/eternallands
+--- eternallands-1.9.2/pkgfiles/eternallands	2011-06-16 09:03:18.000000000 +1100
++++ eternallands-1.9.2-patched/pkgfiles/eternallands	2011-11-14 17:41:16.900771647 +1100
+@@ -49,19 +49,6 @@
+ 	exit
+ fi
+ 
+-# check the minimum packages are installed OK
+-if [ -x /usr/bin/dpkg ]
+-then
+-	installedOK=true
+-	[ -z "$(dpkg --list eternallands | grep ^ii)" ] && installedOK=false
+-	[ -z "$(dpkg --list eternallands-data | grep ^ii)" ] && installedOK=false
+-	if ! $installedOK
+-	then
+-		zenity --error --text "Eternal Lands is not completely installed. As root or using sudo, please run \"dpkg --configure -a\" to complete the install."
+-		exit
+-	fi
+-fi
+-
+ # make sure the user config tree exists
+ mkdir -p ~/.elc/
+ 
+@@ -69,7 +56,7 @@
+ serverfile=~/.elc/servers.lst
+ if [ ! -r $serverfile -o ! -s $serverfile ]
+ then
+-	cp -p /usr/share/games/EternalLands/servers.lst $serverfile
++	cp -p /usr/share/games/eternallands/servers.lst $serverfile
+ fi
+ chmod +wr $serverfile
+ 
+@@ -126,7 +113,7 @@
+ # copy an el.ini file if we don't have one
+ if [ ! -r $inifile -o ! -s $inifile ]
+ then
+-	cp -p /usr/share/games/EternalLands/el.ini $inifile
++	cp -p /usr/share/games/eternallands/el.ini $inifile
+ fi
+ chmod +wr $inifile
+ 
+@@ -134,11 +121,11 @@
+ if [ ! -r ~/.elc/no.el.ini.check -a -n "$config" ]
+ then
+ 	show_suppression=false
+-	if [ "$(grep ^#data_dir $inifile | tail -1 | grep '^#data_dir = /usr/share/games/EternalLands$')" = "" ]
++	if [ "$(grep ^#data_dir $inifile | tail -1 | grep '^#data_dir = /usr/share/games/eternallands$')" = "" ]
+ 	then
+ 		if zenity --question --text="Warning: $inifile does not use installed game data, shall I fix this problem?"
+ 		then
+-			sed -i 's/^#data_dir.*$/#data_dir = \/usr\/share\/games\/EternalLands/g' $inifile
++			sed -i 's/^#data_dir.*$/#data_dir = \/usr\/share\/games\/eternallands/g' $inifile
+ 		else
+ 			show_suppression=true
+ 		fi
