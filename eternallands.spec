@@ -1,7 +1,7 @@
 Name:		eternallands
 Summary:	A free to play, graphical MMORPG client
 Version:	1.9.2
-Release:	%mkrel 1
+Release:	2
 License:	QTPL-based
 Group:		Games/Adventure
 URL:		http://www.eternal-lands.com
@@ -14,8 +14,7 @@ Patch2:		eternallands-1.9.2-verbose.patch
 BuildRequires:	cal3d-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	libxml2-devel
-BuildRequires:	MesaGL-devel
-BuildRequires:	MesaGLU-devel
+BuildRequires:	mesa-common-devel
 BuildRequires:	openal-devel
 BuildRequires:	png-devel
 BuildRequires:	SDL-devel
@@ -25,7 +24,6 @@ BuildRequires:	libx11-devel
 BuildRequires:	zlib-devel
 Requires:	zenity
 Requires:	%{name}-data = %{version}
-BuildRoot:	%{_tmppath}/%{oname}-%{version}-%{release}-buildroot
 
 %description
 Eternal Lands is a free to play, graphical MMORPG (massively-multi-player
@@ -44,8 +42,6 @@ sed -i s,-march=i686,,g make.conf
 %make -f Makefile.linux
 
 %install
-rm -rf %{buildroot}
-
 mkdir -p %{buildroot}%{_datadir}/applications
 cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
@@ -71,21 +67,7 @@ cp pkgfiles/%{name} %{buildroot}%{_gamesbindir}/
 install -d %{buildroot}%{_mandir}/man6
 cp pkgfiles/*.6 %{buildroot}%{_mandir}/man6/
 
-%clean
-rm -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post
-%update_menus
-%endif
-
-%if %mdkversion < 200900
-%postun
-%clean_menus
-%endif
-
 %files
-%defattr(-,root,root)
 %doc CHANGES TODO eternal_lands_license.txt
 %{_gamesbindir}/*
 %{_datadir}/applications/mandriva-%{name}.desktop
