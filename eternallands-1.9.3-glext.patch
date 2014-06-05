@@ -1,0 +1,33 @@
+diff -urN eternallands-1.9.3/load_gl_extensions.c eternallands-1.9.3-patched/load_gl_extensions.c
+--- eternallands-1.9.3/load_gl_extensions.c	2012-02-05 11:56:13.000000000 +1100
++++ eternallands-1.9.3-patched/load_gl_extensions.c	2014-06-05 20:01:53.431271792 +1100
+@@ -71,8 +71,6 @@
+ /*	GL_VERSION_1_3		*/
+ 
+ /*	GL_VERSION_1_4		*/
+-PFNGLBLENDCOLORPROC ELglBlendColor = NULL;
+-PFNGLBLENDEQUATIONPROC ELglBlendEquation = NULL;
+ PFNGLBLENDFUNCSEPARATEPROC ELglBlendFuncSeparate = NULL;
+ PFNGLFOGCOORDPOINTERPROC ELglFogCoordPointer = NULL;
+ PFNGLFOGCOORDDPROC ELglFogCoordd = NULL;
+@@ -376,8 +374,6 @@
+ {
+ 	GLboolean r = GL_TRUE;
+ 
+-	r = ((ELglBlendColor = (PFNGLBLENDCOLORPROC)SDL_GL_GetProcAddress("glBlendColor")) != NULL) && r;
+-	r = ((ELglBlendEquation = (PFNGLBLENDEQUATIONPROC)SDL_GL_GetProcAddress("glBlendEquation")) != NULL) && r;
+ 	r = ((ELglBlendFuncSeparate = (PFNGLBLENDFUNCSEPARATEPROC)SDL_GL_GetProcAddress("glBlendFuncSeparate")) != NULL) && r;
+ 	r = ((ELglFogCoordPointer = (PFNGLFOGCOORDPOINTERPROC)SDL_GL_GetProcAddress("glFogCoordPointer")) != NULL) && r;
+ 	r = ((ELglFogCoordd = (PFNGLFOGCOORDDPROC)SDL_GL_GetProcAddress("glFogCoordd")) != NULL) && r;
+diff -urN eternallands-1.9.3/load_gl_extensions.h eternallands-1.9.3-patched/load_gl_extensions.h
+--- eternallands-1.9.3/load_gl_extensions.h	2012-02-05 11:56:13.000000000 +1100
++++ eternallands-1.9.3-patched/load_gl_extensions.h	2014-06-05 20:01:55.840310829 +1100
+@@ -118,8 +118,6 @@
+ /*	GL_VERSION_1_3		*/
+ 
+ /*	GL_VERSION_1_4		*/
+-extern PFNGLBLENDCOLORPROC ELglBlendColor;
+-extern PFNGLBLENDEQUATIONPROC ELglBlendEquation;
+ extern PFNGLBLENDFUNCSEPARATEPROC ELglBlendFuncSeparate;
+ extern PFNGLFOGCOORDPOINTERPROC ELglFogCoordPointer;
+ extern PFNGLFOGCOORDDPROC ELglFogCoordd;

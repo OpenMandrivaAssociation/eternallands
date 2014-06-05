@@ -1,0 +1,54 @@
+From 5bd334d9148b95b26c7cfc577737d993508a8215 Mon Sep 17 00:00:00 2001
+From: Paul Broadhead <pjbroad@twinmoons.org.uk>
+Date: Fri, 8 Mar 2013 19:43:55 +0000
+Subject: [PATCH] Support use of libxml2 > 2.8.x, see
+ https://github.com/raduprv/Eternal-Lands/issues/9
+
+---
+ actor_scripts.c | 2 +-
+ sky.c           | 2 +-
+ sound.c         | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/actor_scripts.c b/actor_scripts.c
+index cc24724..5a71f15 100644
+--- a/actor_scripts.c
++++ b/actor_scripts.c
+@@ -4717,7 +4717,7 @@ int read_actor_defs (const char *dir, const char *index)
+ 
+ 	safe_snprintf (fname, sizeof(fname), "%s/%s", dir, index);
+ 
+-	doc = xmlReadFile (fname, NULL, 0);
++	doc = xmlReadFile (fname, NULL, XML_PARSE_NOENT);
+ 	if (doc == NULL) {
+ 		LOG_ERROR("Unable to read actor definition file %s", fname);
+ 		return 0;
+diff --git a/sky.c b/sky.c
+index ce55b45..181aa00 100644
+--- a/sky.c
++++ b/sky.c
+@@ -2363,7 +2363,7 @@ int skybox_read_defs(const char *file_name, const char *map_name)
+ 	xmlDoc *doc;
+ 	int ok = 1;
+ 
+-	doc = xmlReadFile(file_name, NULL, 0);
++	doc = xmlReadFile(file_name, NULL, XML_PARSE_NOENT);
+ 	if (doc == NULL) {
+ 		LOG_ERROR("Unable to read skybox definition file %s", file_name);
+ 		return 0;
+diff --git a/sound.c b/sound.c
+index a157f46..38ec8d4 100644
+--- a/sound.c
++++ b/sound.c
+@@ -5576,7 +5576,7 @@ void load_sound_config_data (const char *file)
+ 	if (!el_file_exists(file))
+ 		return;
+ 
+-	if ((doc = xmlReadFile(file, NULL, 0)) == NULL)
++	if ((doc = xmlReadFile(file, NULL, XML_PARSE_NOENT)) == NULL)
+ 	{
+ 		char str[200];
+ 		safe_snprintf(str, sizeof(str), snd_config_open_err_str, file);
+-- 
+1.9.3
+
