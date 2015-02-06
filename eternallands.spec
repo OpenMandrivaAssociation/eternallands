@@ -1,7 +1,7 @@
 Summary:	A free to play, graphical MMORPG client
 Name:		eternallands
 Version:	1.9.3
-Release:	2
+Release:	3
 License:	QTPL-based
 Group:		Games/Adventure
 URL:		http://www.eternal-lands.com
