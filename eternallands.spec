@@ -4,7 +4,7 @@ Version:	1.9.3
 Release:	3
 License:	QTPL-based
 Group:		Games/Adventure
-URL:		http://www.eternal-lands.com
+URL:		https://www.eternal-lands.com
 # it's better to get sources from here than from git:
 # http://ppa.launchpad.net/pjbroad/ppa/ubuntu/pool/main/e/
 Source0:	%{name}-%{version}.tar.gz
